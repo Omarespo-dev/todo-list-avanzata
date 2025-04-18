@@ -1,7 +1,7 @@
 // FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Main() {
 
@@ -12,28 +12,47 @@ export default function Main() {
   // Imposto lo stato per il form con campi vuoti
   const [formData, setFormData] = useState(initialFormData)
 
-  
+
+  // Ora per la versione con il local storage 1 step si controlla se ci sono task salvati nel localStorage
+
+  // useEffect(() => {
+
+  // })
+
+
 
   //Andiamo a fare la funzione per Onchange quando l utente scrive dentro l input
   function OnChange(e) {
     // facciamo il destructoring e ricaviamo il nome dall input e valore 
     const { name, value } = e.target
 
+    
 
     // passo il parametro solo per ricavarmi lo stato attuale di setFormData e modificarlo
-    setFormData((currentFormData) => ({
+    setFormData({
 
-      ...currentFormData, // = { title: "", description: "" }
+      ...formData, // = { title: "", description: "" }
       [name]: value     // = { title: "Ciao" }
 
-    }));
+    });
 
     // “Prendi il name dall’input (cioè il nome del campo, tipo title o description), e mettici dentro il value (cioè quello che l’utente sta scrivendo)”.
 
   }
 
+  
+  
+  
   // Impostiamo lo stato con array vuoto
   const [addTask, SetAddTask] = useState([])
+
+
+  // GESTIRE I VARI ERRORI PER OGNI INPUT 
+  const [errorGeneral, setErrorGeneral] = useState(''); // Stato per gestire l'errore
+  // ERRORE TITOLO
+  const [errorTitle, setErrorTitle] = useState(''); // Stato per gestire l'errore
+  // ERRORE Description
+  const [errorDescription, setErrorDescription] = useState(''); // Stato per gestire l'errore
 
 
   // Ora andiamo a gestire l invio del form
@@ -41,14 +60,47 @@ export default function Main() {
     // all invio non resetta la pagina
     e.preventDefault();
 
+    console.log(formData)
+
+    // VALIDAZIONE GENERALE DEL FORM sia per entrambi titolo e e descrizione etcc
+    
+    if(formData.title === "" && formData.description === ""){
+      setErrorGeneral("Titolo e descrizione non possono essere vuoti.")
+      return
+    }
+
+    if(formData.title === ""){
+      setErrorTitle("Titolo non inserito")
+      return
+    }
+    
+    if (formData.description === ""){
+      setErrorDescription("Descrizione non inserita")
+      return
+    }
+
+    
+    
     // Ora dobbiamo gestire che all invio del form quei dati compilati devono essere aggiunti sotto 
     SetAddTask((initial) => {
       return [...initial, formData] //Faccio copia di initial [] poi gli dico aggiungimi FormData che sarebbe l ogetto con i value riempiti 
+      
     })
+
     
+    // DOPO INVIO DEL FORM RESET DI TUTTO IL FORM COMPRESO GLI ERRORI 
     setFormData(initialFormData);
+    setErrorGeneral("")
+    setErrorTitle("")
+    setErrorDescription("")
+
   }
 
+  // VERIFICA CON CONSOLE.LOG FATTA CON USE EFFECT   
+  // AL MONTAGGIO DEL COMPONENTE FAMMI IL CONSOLE.LOG DI ADDTASK  E ANCHE QUANDO CAMBIA ADDTASK
+  // useEffect(() => {
+  //   console.log(addTask);
+  // }, [addTask]);
 
 
   return (
@@ -65,6 +117,7 @@ export default function Main() {
                 placeholder="Title"
                 onChange={OnChange}
               />
+              {errorTitle && <p style={{ color: 'red' }}>{errorTitle}</p>}
 
               <input
                 type="text"
@@ -73,8 +126,10 @@ export default function Main() {
                 placeholder="Description"
                 onChange={OnChange}
               />
+              {errorDescription && <p style={{ color: 'red' }}>{errorDescription}</p>}
 
               <button>Add <span style={{ color: "#5E60CE" }}>Task</span></button>
+              {errorGeneral && <p style={{ color: 'red' }}>{errorGeneral}</p>}
             </form>
           </div>
 
@@ -86,8 +141,8 @@ export default function Main() {
 
             <section className="down-section">
 
-              {addTask.map((task) => (
-                <section className="section-task">
+              {addTask.map((task,index) => (
+                <section className="section-task" key={index}>
                   <input type="checkbox" />
                   <p>{task.title} : {task.description}</p>
 
