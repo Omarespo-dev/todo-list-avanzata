@@ -121,7 +121,7 @@ export default function Main() {
         <div className="flex-main">
 
           <div className="form-container">
-            <form action="submit" onSubmit={OnSubmit}>
+            <form action="submit" onSubmit={OnSubmit} autoComplete="off">
               <input
                 type="text"
                 value={formData.title}
