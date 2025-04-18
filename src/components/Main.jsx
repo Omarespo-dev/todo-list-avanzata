@@ -13,6 +13,14 @@ export default function Main() {
   const [formData, setFormData] = useState(initialFormData)
 
 
+  // GESTIRE I VARI ERRORI PER OGNI INPUT 
+  const [errorGeneral, setErrorGeneral] = useState(''); // Stato per gestire l'errore
+  // ERRORE TITOLO
+  const [errorTitle, setErrorTitle] = useState(''); // Stato per gestire l'errore
+  // ERRORE Description
+  const [errorDescription, setErrorDescription] = useState(''); // Stato per gestire l'errore
+
+
   // Ora per la versione con il local storage 1 step si controlla se ci sono task salvati nel localStorage
 
   // useEffect(() => {
@@ -26,7 +34,7 @@ export default function Main() {
     // facciamo il destructoring e ricaviamo il nome dall input e valore 
     const { name, value } = e.target
 
-    
+
 
     // passo il parametro solo per ricavarmi lo stato attuale di setFormData e modificarlo
     setFormData({
@@ -38,21 +46,25 @@ export default function Main() {
 
     // “Prendi il name dall’input (cioè il nome del campo, tipo title o description), e mettici dentro il value (cioè quello che l’utente sta scrivendo)”.
 
+    // Quando l'utente inizia a scrivere, rimuovi l'errore corrispondente
+    if (name === "title") {
+      setErrorTitle("");
+    }
+
+    if (name === "description") {
+      setErrorDescription("");
+    }
+
+    // Se c’è un errore generale, lo elimini appena l'utente scrive qualcosa in uno dei campi
+    if (errorGeneral) {
+      setErrorGeneral("");
+    }
+
   }
 
-  
-  
-  
+
   // Impostiamo lo stato con array vuoto
   const [addTask, SetAddTask] = useState([])
-
-
-  // GESTIRE I VARI ERRORI PER OGNI INPUT 
-  const [errorGeneral, setErrorGeneral] = useState(''); // Stato per gestire l'errore
-  // ERRORE TITOLO
-  const [errorTitle, setErrorTitle] = useState(''); // Stato per gestire l'errore
-  // ERRORE Description
-  const [errorDescription, setErrorDescription] = useState(''); // Stato per gestire l'errore
 
 
   // Ora andiamo a gestire l invio del form
@@ -63,31 +75,31 @@ export default function Main() {
     console.log(formData)
 
     // VALIDAZIONE GENERALE DEL FORM sia per entrambi titolo e e descrizione etcc
-    
-    if(formData.title === "" && formData.description === ""){
+
+    if (formData.title.trim() === "" && formData.description.trim() === "") {
       setErrorGeneral("Titolo e descrizione non possono essere vuoti.")
       return
     }
 
-    if(formData.title === ""){
+    if (formData.title.trim() === "") {
       setErrorTitle("Titolo non inserito")
       return
     }
-    
-    if (formData.description === ""){
+
+    if (formData.description.trim() === "") {
       setErrorDescription("Descrizione non inserita")
       return
     }
 
-    
-    
+
+
     // Ora dobbiamo gestire che all invio del form quei dati compilati devono essere aggiunti sotto 
     SetAddTask((initial) => {
       return [...initial, formData] //Faccio copia di initial [] poi gli dico aggiungimi FormData che sarebbe l ogetto con i value riempiti 
-      
+
     })
 
-    
+
     // DOPO INVIO DEL FORM RESET DI TUTTO IL FORM COMPRESO GLI ERRORI 
     setFormData(initialFormData);
     setErrorGeneral("")
@@ -141,7 +153,7 @@ export default function Main() {
 
             <section className="down-section">
 
-              {addTask.map((task,index) => (
+              {addTask.map((task, index) => (
                 <section className="section-task" key={index}>
                   <input type="checkbox" />
                   <p>{task.title} : {task.description}</p>
