@@ -1,0 +1,242 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(-45deg, #262626, #0D0D0D, #262626);
+  background-size: 400% 400%;
+  animation: gradientBackground 10s ease infinite;
+}
+
+/* COLORE BODY PAGE */
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+/* Header set */
+
+header{
+  /* background-color: rebeccapurple; */
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  margin-top: 20px;
+}
+
+.container-header{
+  display: flex;
+  justify-content: center;
+  background-color: #0D0D0D;
+  width: 90%;
+  border-radius: 20px;
+}
+
+.container-header section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-header section img{
+  margin-right: 20px;
+}
+
+/* MAIN */
+
+.container-main{
+  display: flex;
+  justify-content: center;
+  /* height: 100vh; */
+  margin-top: 20px;
+}
+
+.flex-main{
+  width: 90%;
+  background-color: #262626;
+  border-radius: 20px;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container{
+  width: 60%;
+}
+
+.form-container form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container form input{
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+  margin-top: 20px;
+  background-color: #333333;
+  color: gray;
+}
+
+
+
+
+
+.form-container form input:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+.form-container form button{
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+  margin-top: 20px;
+  background-color:#0D0D0D;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.5s ease-in-out;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-container form button:hover{
+  background-color: #333333;
+  
+}
+
+
+
+
+.task-container{
+  width: 60%;
+  /* background-color: red; */
+  /* height: 300px; */
+  margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* PARTE SECTION TASK */
+
+.up-section{
+  display: flex;
+  justify-content: space-between;
+}
+
+.up-section span{
+  color: #8284FA;
+}
+.down-section{
+  border-top: gainsboro 1px solid ;
+  /* height: 150px; */
+  margin-top: 30px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.section-task{
+  width: 100%;
+  background-color: #333333;
+  height: 70px;
+  margin-top: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.section-task p{
+  margin-left: 10px;
+  color: white;
+  font-size: 13px;
+  margin-right: 10px;
+}
+
+
+
+
+/* input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 6px;
+  border-radius: 10px;
+  border: 2px solid #4EA8DE;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+  display: inline-block;
+  
+}
+
+input[type="checkbox"]:checked {
+  background-color: #8284FA;
+  border: 2px solid #8284FA;
+} */
+
+/* ✔ simbolo */
+/* input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: white;
+  position: absolute;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+
+
+
+/* quando è checked, applica lo stile al fratello <p> */
+input[type="checkbox"]:checked + p {
+  text-decoration: line-through;
+  color: gray;
+}
+
+
+
+
+/* Footer */
+.container-footer{
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.flex-footer{
+  width: 90%;
+  background-color: #0D0D0D;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-footer section{
+  
+}
