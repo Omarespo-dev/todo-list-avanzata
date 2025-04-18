@@ -11,9 +11,16 @@ export default function Main() {
 
   // Imposto lo stato per il form con campi vuoti
   const [formData, setFormData] = useState(initialFormData)
+  
+  // Impostiamo lo stato con array vuoto per aggiungere le informazione dell utente in page
+  const [addTask, SetAddTask] = useState([])
+
+  // Impostiamo lo stato che gestisce il count
+  const [count, SetCount] = useState(0)
 
 
-  // GESTIRE I VARI ERRORI PER OGNI INPUT 
+
+  // GESTIRE I VARI ERRORI PER OGNI INPUT VALIDAZIONI
   const [errorGeneral, setErrorGeneral] = useState(''); // Stato per gestire l'errore
   // ERRORE TITOLO
   const [errorTitle, setErrorTitle] = useState(''); // Stato per gestire l'errore
@@ -21,20 +28,11 @@ export default function Main() {
   const [errorDescription, setErrorDescription] = useState(''); // Stato per gestire l'errore
 
 
-  // Ora per la versione con il local storage 1 step si controlla se ci sono task salvati nel localStorage
-
-  // useEffect(() => {
-
-  // })
-
-
 
   //Andiamo a fare la funzione per Onchange quando l utente scrive dentro l input
   function OnChange(e) {
     // facciamo il destructoring e ricaviamo il nome dall input e valore 
     const { name, value } = e.target
-
-
 
     // passo il parametro solo per ricavarmi lo stato attuale di setFormData e modificarlo
     setFormData({
@@ -63,19 +61,13 @@ export default function Main() {
   }
 
 
-  // Impostiamo lo stato con array vuoto
-  const [addTask, SetAddTask] = useState([])
-
-
   // Ora andiamo a gestire l invio del form
   function OnSubmit(e) {
     // all invio non resetta la pagina
     e.preventDefault();
 
-    console.log(formData)
 
     // VALIDAZIONE GENERALE DEL FORM sia per entrambi titolo e e descrizione etcc
-
     if (formData.title.trim() === "" && formData.description.trim() === "") {
       setErrorGeneral("Titolo e descrizione non possono essere vuoti.")
       return
@@ -90,15 +82,23 @@ export default function Main() {
       setErrorDescription("Descrizione non inserita")
       return
     }
+    // VALIDAZIONE PIU APPROFONDITE COME IL NUMERO DI CARATTERI MINIMI O MASSIMI
 
 
+    // Incremento del numero per le task
+    const increment = () => {
+      SetCount(count + 1)
+    }
 
     // Ora dobbiamo gestire che all invio del form quei dati compilati devono essere aggiunti sotto 
     SetAddTask((initial) => {
+      
+      increment()
       return [...initial, formData] //Faccio copia di initial [] poi gli dico aggiungimi FormData che sarebbe l ogetto con i value riempiti 
-
     })
 
+
+   
 
     // DOPO INVIO DEL FORM RESET DI TUTTO IL FORM COMPRESO GLI ERRORI 
     setFormData(initialFormData);
@@ -106,14 +106,10 @@ export default function Main() {
     setErrorTitle("")
     setErrorDescription("")
 
+    // sSemplice console.log per vedere il formData cioe l oggetto che ho compilato
+    console.log(formData)
+
   }
-
-  // VERIFICA CON CONSOLE.LOG FATTA CON USE EFFECT   
-  // AL MONTAGGIO DEL COMPONENTE FAMMI IL CONSOLE.LOG DI ADDTASK  E ANCHE QUANDO CAMBIA ADDTASK
-  // useEffect(() => {
-  //   console.log(addTask);
-  // }, [addTask]);
-
 
   return (
     <>
@@ -128,8 +124,12 @@ export default function Main() {
                 name="title"
                 placeholder="Title"
                 onChange={OnChange}
+                style={{border: errorGeneral  || errorTitle ? '2px solid red' : null}}
               />
+              {/* SE ERROR TITLE che e in questo caso e "Titolo non inserito",la condizione errorTitle diventa vera e quindi il paragrafo <p> con il messaggio di errore verrà renderizzato. */}
               {errorTitle && <p style={{ color: 'red' }}>{errorTitle}</p>}
+              
+              {/* &&: Se la condizione a sinistra è vera (truthy), esegue il codice a destra. Se la condizione è falsa (falsy), non esegue nulla. */}
 
               <input
                 type="text"
@@ -137,18 +137,19 @@ export default function Main() {
                 name="description"
                 placeholder="Description"
                 onChange={OnChange}
+                style={{border: errorGeneral  || errorDescription ? '2px solid red' : null}}
               />
               {errorDescription && <p style={{ color: 'red' }}>{errorDescription}</p>}
 
-              <button>Add <span style={{ color: "#5E60CE" }}>Task</span></button>
+              <button >Add <span style={{ color: "#5E60CE", }}>Task</span></button>
               {errorGeneral && <p style={{ color: 'red' }}>{errorGeneral}</p>}
             </form>
           </div>
 
           <div className="task-container">
             <section className="up-section">
-              <span>Task created</span>
-              <span>Completed</span>
+              <span>Task created: {count}</span>
+              <span>Completed {count}</span>
             </section>
 
             <section className="down-section">
