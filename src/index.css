@@ -1,10 +1,10 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(-45deg, #262626, #0D0D0D, #262626);
   background-size: 400% 400%;
@@ -17,9 +17,11 @@ body{
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -29,7 +31,7 @@ body{
 
 /* Header set */
 
-header{
+header {
   /* background-color: rebeccapurple; */
   display: flex;
   justify-content: center;
@@ -37,7 +39,7 @@ header{
   margin-top: 20px;
 }
 
-.container-header{
+.container-header {
   display: flex;
   justify-content: center;
   background-color: #0D0D0D;
@@ -45,25 +47,26 @@ header{
   border-radius: 20px;
 }
 
-.container-header section{
+.container-header section {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.container-header section img{
+
+.container-header section img {
   margin-right: 20px;
 }
 
 /* MAIN */
 
-.container-main{
+.container-main {
   display: flex;
   justify-content: center;
   /* height: 100vh; */
   margin-top: 20px;
 }
 
-.flex-main{
+.flex-main {
   width: 90%;
   background-color: #262626;
   border-radius: 20px;
@@ -73,16 +76,16 @@ header{
   align-items: center;
 }
 
-.form-container{
+.form-container {
   width: 60%;
 }
 
-.form-container form{
+.form-container form {
   display: flex;
   flex-direction: column;
 }
 
-.form-container form input{
+.form-container form input {
   border-radius: 10px;
   padding: 5px;
   border: none;
@@ -95,32 +98,32 @@ header{
 
 
 
-.form-container form input:focus{
+.form-container form input:focus {
   outline: none;
   box-shadow: none;
 }
 
-.form-container form button{
+.form-container form button {
   border-radius: 10px;
   padding: 5px;
   border: none;
   margin-top: 20px;
-  background-color:#0D0D0D;
+  background-color: #0D0D0D;
   cursor: pointer;
   color: white;
   transition: background-color 0.5s ease-in-out;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.form-container form button:hover{
+.form-container form button:hover {
   background-color: #333333;
-  
+
 }
 
 
 
 
-.task-container{
+.task-container {
   width: 60%;
   /* background-color: red; */
   /* height: 300px; */
@@ -139,23 +142,56 @@ header{
 
 /* PARTE SECTION TASK */
 
-.up-section{
+.up-section {
   display: flex;
   justify-content: space-between;
 }
 
-.up-section span{
+.up-section span {
   color: #8284FA;
 }
-.down-section{
-  border-top: gainsboro 1px solid ;
+
+.down-section {
+  border-top: #808080 1px solid;
   /* height: 150px; */
   margin-top: 30px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  height: 400px;
 }
 
-.section-task{
+/* PARTE VUOTA */
+.down-section-empty {
+  border-top: #808080 1px solid;
+  /* height: 150px; */
+  margin-top: 30px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  text-align: center;
+}
+
+.container-empty {
+  color:#808080 ;
+  width: 350px;
+  font-size: 15px;
+ 
+}
+
+.container-empty img {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+/* PARTE VUOTA  finita*/
+
+
+
+
+.section-task {
   width: 100%;
   background-color: #333333;
   height: 70px;
@@ -167,7 +203,7 @@ header{
   padding: 10px;
 }
 
-.section-task p{
+.section-task p {
   margin-left: 10px;
   color: white;
   font-size: 13px;
@@ -211,7 +247,7 @@ input[type="checkbox"]:checked {
 
 
 /* quando è checked, applica lo stile al fratello <p> */
-input[type="checkbox"]:checked + p {
+input[type="checkbox"]:checked+p {
   text-decoration: line-through;
   color: gray;
 }
@@ -220,7 +256,7 @@ input[type="checkbox"]:checked + p {
 
 
 /* Footer */
-.container-footer{
+.container-footer {
   display: flex;
   justify-content: center;
   height: 100px;
@@ -228,7 +264,7 @@ input[type="checkbox"]:checked + p {
   margin-bottom: 20px;
 }
 
-.flex-footer{
+.flex-footer {
   width: 90%;
   background-color: #0D0D0D;
   border-radius: 20px;
@@ -237,6 +273,4 @@ input[type="checkbox"]:checked + p {
   align-items: center;
 }
 
-.flex-footer section{
-  
-}
+.flex-footer section {}

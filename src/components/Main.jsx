@@ -72,7 +72,7 @@ export default function Main() {
         }
       }
     }
-    
+
 
   }
 
@@ -164,23 +164,43 @@ export default function Main() {
 
           <div className="task-container">
             <section className="up-section">
-              <span>Task created: {count}</span>
-              <span>Completed {count}</span>
+              <span style={{color:"#4EA8DE",fontSize:"13px"}}>Task created:
+                <span style={{ backgroundColor: "#808080", color: "white", padding: "2px 5px", borderRadius: "9999px",fontSize:"12px",marginLeft:"5px" }}>{count}</span>
+
+              </span>
+
+              <span style={{color:"#8284FA",fontSize:"13px"}}>Completed: 
+                <span style={{ backgroundColor: "#808080", color: "white", padding: "2px 5px", borderRadius: "9999px",fontSize:"12px",marginLeft:"5px" }}>{count} </span>
+              </span>
             </section>
 
-            <section className="down-section">
-
-              {addTask.map((task, index) => (
-                <section className="section-task" key={index}>
-                  <input type="checkbox" />
-                  <p>{task.title} : {task.description}</p>
-
-                  <span><FontAwesomeIcon icon={faTrash} style={{ color: "#808080", }} /></span>
-                </section>
-              ))}
+            {addTask.length <= 0 ?
+              <section className="down-section-empty">
+                <div className="container-empty">
+                  <img src="../img/Clipboard.png" alt="" />
+                  <p>You don't have any tasks registered yet
+                    Create tasks and organize your to-do items</p>
+                </div>
+              </section>
 
 
-            </section>
+              :
+
+              <section className="down-section">
+
+                {addTask.map((task, index) => (
+                  <section className="section-task" key={index}>
+                    <input type="checkbox" />
+                    <p>{task.title} : {task.description}</p>
+
+                    <span><FontAwesomeIcon icon={faTrash} style={{ color: "#808080", }} /></span>
+                  </section>
+                ))}
+
+
+              </section>
+            }
+
           </div>
 
         </div>
