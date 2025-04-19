@@ -74,6 +74,8 @@ header {
   /* justify-content: center; */
   flex-direction: column;
   align-items: center;
+  /* Calcola altezza minima  */
+  min-height: calc(90vh - 100px);
 }
 
 .form-container {
@@ -153,11 +155,9 @@ header {
 
 .down-section {
   border-top: #808080 1px solid;
-  /* height: 150px; */
   margin-top: 30px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  height: 400px;
 }
 
 /* PARTE VUOTA */
@@ -170,8 +170,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
   text-align: center;
+  height: 450px;
 }
 
 .container-empty {
