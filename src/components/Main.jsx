@@ -11,7 +11,7 @@ export default function Main() {
 
   // Imposto lo stato per il form con campi vuoti
   const [formData, setFormData] = useState(initialFormData)
-  
+
   // Impostiamo lo stato con array vuoto per aggiungere le informazione dell utente in page
   const [addTask, SetAddTask] = useState([])
 
@@ -42,6 +42,7 @@ export default function Main() {
 
     });
 
+
     // “Prendi il name dall’input (cioè il nome del campo, tipo title o description), e mettici dentro il value (cioè quello che l’utente sta scrivendo)”.
 
     // Quando l'utente inizia a scrivere, rimuovi l'errore corrispondente
@@ -53,10 +54,25 @@ export default function Main() {
       setErrorDescription("");
     }
 
-    // Se c’è un errore generale, lo elimini appena l'utente scrive qualcosa in uno dei campi
+    // Se c'è un errore generale
     if (errorGeneral) {
-      setErrorGeneral("");
+      setErrorGeneral(""); // Rimuovi l'errore generale
+
+      // Se sto scrivendo nella descrizione, controlla il titolo
+      if (name === "description") {
+        if (formData.title.trim() === "") {
+          setErrorTitle("Titolo non inserito");
+        }
+      }
+
+      // Se sto scrivendo nel titolo, controlla la descrizione
+      if (name === "title") {
+        if (formData.description.trim() === "") {
+          setErrorDescription("Descrizione non inserita");
+        }
+      }
     }
+    
 
   }
 
@@ -92,13 +108,13 @@ export default function Main() {
 
     // Ora dobbiamo gestire che all invio del form quei dati compilati devono essere aggiunti sotto 
     SetAddTask((initial) => {
-      
+
       increment()
       return [...initial, formData] //Faccio copia di initial [] poi gli dico aggiungimi FormData che sarebbe l ogetto con i value riempiti 
     })
 
 
-   
+
 
     // DOPO INVIO DEL FORM RESET DI TUTTO IL FORM COMPRESO GLI ERRORI 
     setFormData(initialFormData);
@@ -124,11 +140,11 @@ export default function Main() {
                 name="title"
                 placeholder="Title"
                 onChange={OnChange}
-                style={{border: errorGeneral  || errorTitle ? '2px solid red' : null}}
+                style={{ border: errorGeneral || errorTitle ? '2px solid red' : null }}
               />
               {/* SE ERROR TITLE che e in questo caso e "Titolo non inserito",la condizione errorTitle diventa vera e quindi il paragrafo <p> con il messaggio di errore verrà renderizzato. */}
-              {errorTitle && <p style={{ color: 'red' }}>{errorTitle}</p>}
-              
+              {errorTitle ? <p style={{ color: 'red' }}>{errorTitle}</p> : null}
+
               {/* &&: Se la condizione a sinistra è vera (truthy), esegue il codice a destra. Se la condizione è falsa (falsy), non esegue nulla. */}
 
               <input
@@ -137,7 +153,7 @@ export default function Main() {
                 name="description"
                 placeholder="Description"
                 onChange={OnChange}
-                style={{border: errorGeneral  || errorDescription ? '2px solid red' : null}}
+                style={{ border: errorGeneral || errorDescription ? '2px solid red' : null }}
               />
               {errorDescription && <p style={{ color: 'red' }}>{errorDescription}</p>}
 
@@ -164,8 +180,6 @@ export default function Main() {
               ))}
 
 
-
-
             </section>
           </div>
 
@@ -174,3 +188,12 @@ export default function Main() {
     </>
   )
 }
+
+
+
+
+
+
+
+
+
